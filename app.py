@@ -7,6 +7,7 @@ import tempfile
 import os
 import base64
 from datetime import datetime
+import chardet
 
 # ------------------------------------------------------------
 # 1. Configuración de la página
@@ -17,7 +18,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Inicializar contador de muestras en la sesión
+# Inicializar contador de muestras en la sesión (se reinicia al cerrar el navegador)
 if 'muestras_procesadas' not in st.session_state:
     st.session_state.muestras_procesadas = 0
 
@@ -233,7 +234,7 @@ def descargar_plantilla():
 st.markdown(descargar_plantilla(), unsafe_allow_html=True)
 
 # ------------------------------------------------------------
-# 3.2 Sección: Guía de formato (corregida)
+# 3.2 Sección: Guía de formato
 # ------------------------------------------------------------
 with st.expander("📖 Guía de formato del archivo"):
     st.markdown("""
