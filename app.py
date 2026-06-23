@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import io
 import math
 from fpdf import FPDF
 import tempfile
@@ -9,7 +8,7 @@ import base64
 from datetime import datetime
 
 # ------------------------------------------------------------
-# 1. Configuración de la página
+# Configuración de la página
 # ------------------------------------------------------------
 st.set_page_config(
     page_title="Modelagua - Análisis Básico",
@@ -22,7 +21,7 @@ if 'muestras_procesadas' not in st.session_state:
     st.session_state.muestras_procesadas = 0
 
 # ------------------------------------------------------------
-# 2. Funciones de análisis
+# Funciones de análisis (sin cambios, pero las mantengo completas)
 # ------------------------------------------------------------
 def convertir_a_mg_L(valor, unidad, parametro):
     if unidad == 'mg/L' or unidad == 'ppm':
@@ -199,19 +198,21 @@ def generar_pdf(lista_informes, resumen_final, lista_resumen):
     return pdf
 
 # ------------------------------------------------------------
-# 3. Interfaz de Streamlit
+# Interfaz de Streamlit (CORREGIDA, sin errores de sintaxis)
 # ------------------------------------------------------------
 st.title("💧 Modelagua - Análisis Básico")
-st.markdown("""
-**Bienvenido al análisis básico gratuito.**  
-Puedes subir un archivo (CSV o Excel) o ingresar los datos manualmente.  
-**Límite:** 3 muestras por sesión (no se guarda información personal).
-""")
+st.markdown(
+    """
+    **Bienvenido al análisis básico gratuito.**
+    Puedes subir un archivo (CSV o Excel) o ingresar los datos manualmente.
+    **Límite:** 3 muestras por sesión (no se guarda información personal).
+    """
+)
 
 st.info(f"📊 Muestras procesadas en esta sesión: **{st.session_state.muestras_procesadas} de 3** (plan gratuito).")
 
 # ------------------------------------------------------------
-# 3.1 Botón para descargar plantilla de ejemplo
+# Botón para descargar plantilla de ejemplo
 # ------------------------------------------------------------
 def descargar_plantilla():
     plantilla = pd.DataFrame({
@@ -233,13 +234,14 @@ def descargar_plantilla():
 st.markdown(descargar_plantilla(), unsafe_allow_html=True)
 
 # ------------------------------------------------------------
-# 3.2 Sección: Guía de formato
+# Guía de formato (con triple comilla bien cerrada)
 # ------------------------------------------------------------
 with st.expander("📖 Guía de formato del archivo"):
-    st.markdown("""
-    **Columnas obligatorias (nombres exactos):**
-    - `Ca`, `Mg`, `Na`, `K`, `HCO3`, `SO4`, `Cl`, `pH`, `Temp.(oC)`
+    st.markdown(
+        """
+        **Columnas obligatorias (nombres exactos):**
+        - `Ca`, `Mg`, `Na`, `K`, `HCO3`, `SO4`, `Cl`, `pH`, `Temp.(oC)`
 
-    **Unidades aceptadas:** mg/L (por defecto), meq/L, ppm.
+        **Unidades aceptadas:** mg/L (por defecto), meq/L, ppm.
 
-    **Ejemplo de fila (CSV):**
+        **Ejemplo de fila (CSV):**
